@@ -1,5 +1,3 @@
-/* --- style.css (อัปเดตสำหรับ Mobile Responsive) --- */
-
 :root {
     --primary: #4facfe;
     --success: #00f2fe;
@@ -8,7 +6,6 @@
     --bg-dark: #1a1a2e;
 }
 
-/* ลบ overflow: hidden ออกเพื่อให้มือถือไถหน้าจอขึ้นลงได้ */
 body {
     margin: 0;
     font-family: 'Kanit', sans-serif;
@@ -19,12 +16,12 @@ body {
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
-    padding: 20px 0; /* เพิ่มพื้นที่หัวท้ายเวลามือถือจอสั้น */
+    padding: 20px 0;
     box-sizing: border-box;
 }
 
 .background-blob {
-    position: fixed; /* เปลี่ยนเป็น fixed เพื่อให้พื้นหลังอยู่กับที่เวลาไถจอ */
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -32,223 +29,122 @@ body {
     height: 50vw;
     min-width: 300px;
     min-height: 300px;
-    background: linear-gradient(135deg, var(--primary), var(--success));
+    background: linear-gradient(135deg, var(--primary), var(--danger));
     filter: blur(150px);
     z-index: -1;
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 .dashboard-container {
     width: 90%;
-    max-width: 900px;
+    max-width: 1000px; /* ขยายให้กว้างขึ้นนิดหน่อย */
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     padding: 40px;
-    box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.3);
     box-sizing: border-box;
 }
 
 header h1 {
     font-weight: 600;
     margin: 0 0 30px 0;
-    font-size: 1.8rem;
-    text-align: center; /* จัดกึ่งกลางให้สวยบนมือถือ */
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 header h1 span {
     font-weight: 300;
-    font-size: 1rem;
-    opacity: 0.7;
+    font-size: 1.1rem;
+    color: var(--success);
     display: block;
+    margin-top: 5px;
 }
 
-/* จุดสำคัญ: ใช้ Grid ที่สามารถปรับเปลี่ยนได้ */
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
+    gap: 30px;
+    align-items: start;
 }
 
-.bin-wrapper {
-    position: relative;
-    width: 160px; /* ย่อขนาดถังลงนิดหน่อยให้เหมาะกับทุกจอ */
-    margin: 0 auto;
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* ระยะห่างระหว่างกล่องขวา */
 }
 
+/* Bin Visual */
+.bin-wrapper { position: relative; width: 180px; margin: 0 auto; }
 .bin-body {
-    width: 100%;
-    height: 230px;
-    background: #e0e0e0;
-    border-radius: 10px 10px 40px 40px;
-    position: relative;
-    overflow: hidden;
-    border: 4px solid #333;
+    width: 100%; height: 260px; background: #e0e0e0;
+    border-radius: 10px 10px 40px 40px; position: relative;
+    overflow: hidden; border: 4px solid #222; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
 }
-
 .bin-glass-window {
-    position: absolute;
-    top: 20%;
-    left: 15%;
-    width: 70%;
-    height: 70%;
-    background: rgba(0,0,0,0.1);
-    border-radius: 5px;
-    overflow: hidden;
+    position: absolute; top: 15%; left: 15%; width: 70%; height: 75%;
+    background: rgba(0,0,0,0.1); border-radius: 5px; overflow: hidden;
 }
-
 .liquid {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 0%;
+    position: absolute; bottom: 0; width: 100%; height: 0%;
     background: linear-gradient(to top, #4facfe 0%, #00f2fe 100%);
     transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .wave {
-    position: absolute;
-    top: -10px;
-    width: 200%;
-    height: 20px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 40%;
+    position: absolute; top: -10px; width: 200%; height: 20px;
+    background: rgba(255,255,255,0.3); border-radius: 40%;
     animation: move-wave 3s infinite linear;
 }
+@keyframes move-wave { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-@keyframes move-wave {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
+/* Cards */
 .card {
     background: rgba(255,255,255,0.05);
     padding: 20px;
     border-radius: 20px;
-    margin-bottom: 20px;
-    text-align: center; /* จัดกึ่งกลางเนื้อหาในกล่อง */
+    border: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
 }
 
-.stat-main {
-    font-size: 3rem;
-    font-weight: 600;
-}
+.card h3 { margin-top: 0; font-size: 1.1rem; margin-bottom: 15px; color: #e0e0e0; }
+.stat-main { font-size: 3.5rem; font-weight: 600; line-height: 1; }
+.label { opacity: 0.7; font-size: 0.9rem; margin: 10px 0; }
+.badge { display: inline-block; padding: 6px 20px; border-radius: 50px; font-size: 0.95rem; font-weight: 600; background: #555; }
 
-.badge {
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    background: #555;
+/* Prediction UI (ใหม่) */
+.prediction-card {
+    background: rgba(0, 242, 254, 0.05);
+    border: 1px solid rgba(0, 242, 254, 0.2);
 }
+.pred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pred-box { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 15px; }
+.pred-label { font-size: 0.75rem; opacity: 0.7; margin: 0 0 5px 0; }
+.pred-box h4 { margin: 0; font-size: 1.2rem; font-weight: 600; }
 
-.control-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.input-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    justify-content: center;
-    width: 100%;
-}
-
+/* Controls */
+.control-group { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.input-row { display: flex; gap: 10px; margin-top: 10px; justify-content: center; width: 100%; }
 input[type="number"], input[type="range"] {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100%; /* ให้ input ขยายเต็มพื้นที่ที่เหลือ */
-    max-width: 150px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: white; padding: 10px; border-radius: 10px; width: 100%; text-align: center; font-size: 1rem;
 }
-
-input[type="range"] {
-    max-width: 100%;
-    margin-top: 10px;
-}
-
 button {
-    background: var(--primary);
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    white-space: nowrap; /* ป้องกันปุ่มตกบรรทัด */
+    background: var(--primary); border: none; color: white; padding: 10px 20px;
+    border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.3s;
 }
+button:hover { filter: brightness(1.2); transform: translateY(-2px); }
+.update-time { font-size: 0.8rem; opacity: 0.5; margin-top: 15px; margin-bottom: 0; }
 
-button:hover { filter: brightness(1.2); }
+/* Chart */
+.chart-section { grid-column: 1 / -1; }
+.chart-container { position: relative; height: 250px; width: 100%; }
 
-.update-time { font-size: 0.8rem; opacity: 0.5; margin-top: 10px; }
-
-
-/* =========================================
-   MOBILE RESPONSIVE (จุดที่แก้ให้มือถือ) 
-   ========================================= */
+/* Mobile */
 @media screen and (max-width: 768px) {
-    .dashboard-container {
-        padding: 25px 20px; /* ลด Padding บนมือถือ */
-        border-radius: 20px;
-        margin: 20px 0;
-    }
-
-    .main-content {
-        grid-template-columns: 1fr; /* สั่งให้เนื้อหาเรียงเป็นแนวตั้ง (บน-ล่าง) */
-        gap: 30px;
-    }
-
-    header h1 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-    }
-
-    .stat-main {
-        font-size: 2.5rem; /* ลดขนาดฟอนต์บนมือถือ */
-    }
-
-    .visual-section {
-        order: -1; /* บังคับให้รูปถังขยะอยู่ด้านบนเสมอในมือถือ */
-    }
-}
-
-/* --- ส่วนของกราฟ (Chart Section) --- */
-.chart-section {
-    grid-column: 1 / -1; /* ให้กราฟกินพื้นที่เต็มความกว้าง (2 คอลัมน์) */
-    margin-top: 10px;
-}
-
-.chart-card {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 20px;
-}
-
-.chart-card h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-    color: #e0e0e0;
-    text-align: left;
-}
-
-.chart-container {
-    position: relative;
-    height: 250px; /* กำหนดความสูงกราฟ */
-    width: 100%;
-}
-
-/* ปรับปรุง Grid สำหรับหน้าจอคอมให้รองรับกราฟที่อยู่ด้านล่าง */
-@media screen and (min-width: 769px) {
-    .main-content {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto; /* เพิ่มแถวสำหรับกราฟ */
-    }
+    .dashboard-container { padding: 25px 20px; border-radius: 20px; margin: 20px 0; }
+    .main-content { grid-template-columns: 1fr; gap: 20px; }
+    .visual-section { order: -1; }
+    .stat-main { font-size: 3rem; }
 }

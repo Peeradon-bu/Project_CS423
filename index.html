@@ -14,7 +14,7 @@
     
     <div class="dashboard-container">
         <header>
-            <h1>ถังขยะอัจฉริยะ <span>Real-time Monitor</span></h1>
+            <h1>ถังขยะอัจฉริยะ <span>Real-time Monitor & AI Prediction</span></h1>
         </header>
 
         <main class="main-content">
@@ -36,19 +36,31 @@
                 <div class="card stat-card">
                     <div class="stat-main">
                         <span id="distVal">--</span>
-                        <small>cm</small>
+                        <small>%</small> 
                     </div>
-                    <p class="label">ระยะทางจากเซนเซอร์</p>
-                    <div id="statusBadge" class="badge">กำลังเชื่อมต่อ...</div>
+                    <p class="label">ปริมาณขยะในถัง</p> <div id="statusBadge" class="badge">กำลังเชื่อมต่อ...</div>
+                </div>
+
+                <div class="card prediction-card">
+                    <h3>🔮 พยากรณ์อัจฉริยะ</h3>
+                    <div class="pred-grid">
+                        <div class="pred-box">
+                            <p class="pred-label">เวลาจนกว่าจะเต็ม</p>
+                            <h4 id="predTime">เก็บข้อมูล...</h4>
+                        </div>
+                        <div class="pred-box">
+                            <p class="pred-label">ความเร็วการทิ้ง</p>
+                            <h4 id="trendIcon">➖ คงที่</h4>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card control-card">
-                    <h3>ตั้งค่าความจุ</h3>
+                    <h3>⚙️ ตั้งค่าความจุ</h3>
                     <div class="control-group">
-                        <label>ความลึกถัง (cm)</label>
                         <input type="range" id="maxDistSlider" min="10" max="100" value="30">
                         <div class="input-row">
-                            <input type="number" id="maxDistInput" value="30">
+                            <input type="number" id="maxDistInput" value="30" title="ความลึกถัง (cm)">
                             <button onclick="updateMaxDistance()">อัปเดต</button>
                         </div>
                     </div>
@@ -58,7 +70,7 @@
 
             <section class="chart-section">
                 <div class="card chart-card">
-                    <h3>📈 แนวโน้มปริมาณขยะ</h3>
+                    <h3>📈 แนวโน้มปริมาณขยะย้อนหลัง</h3>
                     <div class="chart-container">
                         <canvas id="wasteChart"></canvas>
                     </div>
