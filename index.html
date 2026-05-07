@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="background-blob"></div>
@@ -52,6 +53,15 @@
                         </div>
                     </div>
                     <p id="timeText" class="update-time">รอข้อมูลใหม่...</p>
+                </div>
+            </section>
+
+            <section class="chart-section">
+                <div class="card chart-card">
+                    <h3>📈 แนวโน้มปริมาณขยะ</h3>
+                    <div class="chart-container">
+                        <canvas id="wasteChart"></canvas>
+                    </div>
                 </div>
             </section>
         </main>
