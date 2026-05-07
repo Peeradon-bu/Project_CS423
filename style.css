@@ -1,3 +1,5 @@
+/* --- style.css (อัปเดตสำหรับ Mobile Responsive) --- */
+
 :root {
     --primary: #4facfe;
     --success: #00f2fe;
@@ -6,23 +8,30 @@
     --bg-dark: #1a1a2e;
 }
 
+/* ลบ overflow: hidden ออกเพื่อให้มือถือไถหน้าจอขึ้นลงได้ */
 body {
     margin: 0;
     font-family: 'Kanit', sans-serif;
     background-color: var(--bg-dark);
     color: white;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
+    padding: 20px 0; /* เพิ่มพื้นที่หัวท้ายเวลามือถือจอสั้น */
+    box-sizing: border-box;
 }
 
-/* พื้นหลังตกแต่ง */
 .background-blob {
-    position: absolute;
-    width: 500px;
-    height: 500px;
+    position: fixed; /* เปลี่ยนเป็น fixed เพื่อให้พื้นหลังอยู่กับที่เวลาไถจอ */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vw;
+    min-width: 300px;
+    min-height: 300px;
     background: linear-gradient(135deg, var(--primary), var(--success));
     filter: blur(150px);
     z-index: -1;
@@ -38,12 +47,14 @@ body {
     border-radius: 30px;
     padding: 40px;
     box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+    box-sizing: border-box;
 }
 
 header h1 {
     font-weight: 600;
     margin: 0 0 30px 0;
     font-size: 1.8rem;
+    text-align: center; /* จัดกึ่งกลางให้สวยบนมือถือ */
 }
 
 header h1 span {
@@ -53,22 +64,23 @@ header h1 span {
     display: block;
 }
 
+/* จุดสำคัญ: ใช้ Grid ที่สามารถปรับเปลี่ยนได้ */
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
+    align-items: center;
 }
 
-/* Bin Visual */
 .bin-wrapper {
     position: relative;
-    width: 180px;
+    width: 160px; /* ย่อขนาดถังลงนิดหน่อยให้เหมาะกับทุกจอ */
     margin: 0 auto;
 }
 
 .bin-body {
     width: 100%;
-    height: 250px;
+    height: 230px;
     background: #e0e0e0;
     border-radius: 10px 10px 40px 40px;
     position: relative;
@@ -111,16 +123,16 @@ header h1 span {
     100% { transform: translateX(-50%); }
 }
 
-/* Info & Control */
 .card {
     background: rgba(255,255,255,0.05);
     padding: 20px;
     border-radius: 20px;
     margin-bottom: 20px;
+    text-align: center; /* จัดกึ่งกลางเนื้อหาในกล่อง */
 }
 
 .stat-main {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 600;
 }
 
@@ -133,10 +145,18 @@ header h1 span {
     background: #555;
 }
 
+.control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .input-row {
     display: flex;
     gap: 10px;
     margin-top: 15px;
+    justify-content: center;
+    width: 100%;
 }
 
 input[type="number"], input[type="range"] {
@@ -145,6 +165,13 @@ input[type="number"], input[type="range"] {
     color: white;
     padding: 10px;
     border-radius: 10px;
+    width: 100%; /* ให้ input ขยายเต็มพื้นที่ที่เหลือ */
+    max-width: 150px;
+}
+
+input[type="range"] {
+    max-width: 100%;
+    margin-top: 10px;
 }
 
 button {
@@ -155,8 +182,73 @@ button {
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
+    white-space: nowrap; /* ป้องกันปุ่มตกบรรทัด */
 }
 
 button:hover { filter: brightness(1.2); }
 
 .update-time { font-size: 0.8rem; opacity: 0.5; margin-top: 10px; }
+
+
+/* =========================================
+   MOBILE RESPONSIVE (จุดที่แก้ให้มือถือ) 
+   ========================================= */
+@media screen and (max-width: 768px) {
+    .dashboard-container {
+        padding: 25px 20px; /* ลด Padding บนมือถือ */
+        border-radius: 20px;
+        margin: 20px 0;
+    }
+
+    .main-content {
+        grid-template-columns: 1fr; /* สั่งให้เนื้อหาเรียงเป็นแนวตั้ง (บน-ล่าง) */
+        gap: 30px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .stat-main {
+        font-size: 2.5rem; /* ลดขนาดฟอนต์บนมือถือ */
+    }
+
+    .visual-section {
+        order: -1; /* บังคับให้รูปถังขยะอยู่ด้านบนเสมอในมือถือ */
+    }
+}
+
+/* --- ส่วนของกราฟ (Chart Section) --- */
+.chart-section {
+    grid-column: 1 / -1; /* ให้กราฟกินพื้นที่เต็มความกว้าง (2 คอลัมน์) */
+    margin-top: 10px;
+}
+
+.chart-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.chart-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    text-align: left;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px; /* กำหนดความสูงกราฟ */
+    width: 100%;
+}
+
+/* ปรับปรุง Grid สำหรับหน้าจอคอมให้รองรับกราฟที่อยู่ด้านล่าง */
+@media screen and (min-width: 769px) {
+    .main-content {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; /* เพิ่มแถวสำหรับกราฟ */
+    }
+}
