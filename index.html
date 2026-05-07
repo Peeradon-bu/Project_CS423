@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Bin Pro Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="background-blob"></div>
+    
+    <div class="dashboard-container">
+        <header>
+            <h1>ถังขยะอัจฉริยะ <span>Real-time Monitor</span></h1>
+        </header>
+
+        <main class="main-content">
+            <section class="visual-section">
+                <div class="bin-wrapper">
+                    <div class="bin-body">
+                        <div class="bin-glass-window">
+                            <div id="wasteLevel" class="liquid">
+                                <div class="wave"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bin-lid"></div>
+                    <div class="bin-base"></div>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <div class="card stat-card">
+                    <div class="stat-main">
+                        <span id="distVal">--</span>
+                        <small>cm</small>
+                    </div>
+                    <p class="label">ระยะทางจากเซนเซอร์</p>
+                    <div id="statusBadge" class="badge">กำลังเชื่อมต่อ...</div>
+                </div>
+
+                <div class="card control-card">
+                    <h3>ตั้งค่าความจุ</h3>
+                    <div class="control-group">
+                        <label>ความลึกถัง (cm)</label>
+                        <input type="range" id="maxDistSlider" min="10" max="100" value="30">
+                        <div class="input-row">
+                            <input type="number" id="maxDistInput" value="30">
+                            <button onclick="updateMaxDistance()">อัปเดต</button>
+                        </div>
+                    </div>
+                    <p id="timeText" class="update-time">รอข้อมูลใหม่...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
