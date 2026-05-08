@@ -3,7 +3,7 @@ const SUPABASE_URL = 'https://vtjkgfausdyldboiaein.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_5jYp51pYwD1ulw5ktU9vPA_-wa6d3ST';
 const DISCORD_WEBHOOK_URL = 'https://discordapp.com/api/webhooks/1501882110955491429/DleD8QyuQwtkjm7jqyXgiIl6OOTO6o6uo9xxrsfzy_-SIf6n685FpfUMO-zcl5aNUDbL'; // นำ Webhook URL จาก Discord มาวาง
 let isAlerted = false; // ใช้ล็อกเพื่อไม่ให้ส่งข้อความซ้ำรัวๆ เมื่อขยะเกิน 80%
-let MAX_DISTANCE = 10;
+let MAX_DISTANCE = 30;
 let lastDistance = 0;
 let myChart; 
 
